@@ -23,7 +23,7 @@ def register_user(details: User, db: Session = Depends(GetSQLDB())):
         db.commit()
         db.refresh(new_user)
     except Exception as err:
-        print(err)
+        raise HTTPException(status_code=400, detail=str(err))
         
 
     return {
