@@ -33,8 +33,6 @@ COPY start.sh start.sh
 # Make the start script executable
 RUN chmod +x start.sh
 
-#Changing the permission for nginx to server files
-RUN chown -R www-data:www-data .next
  
 # Expose the port Nginx is listening on
 EXPOSE 80
