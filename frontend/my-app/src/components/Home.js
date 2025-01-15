@@ -64,10 +64,20 @@ const Home = () => {
       setUploadMessage(response.data.message);
 
       // After upload, re-fetch the updated list of files
-      const fileResponse = await axios.get(
-        `http://localhost:8000/api/v1/files/${username}`
-      );
-      setFiles(fileResponse.data.files);
+      axios
+        .get(`http://localhost:8000/api/v1/files/${username}`)
+        .then((response) => {
+          if (response.data) {
+            console.log(71);
+            console.log(response.data)
+            setFiles(response.data);
+          } else {
+            console.error("No files found for the user");
+          }
+        })
+        .catch((error) => {
+          setFiles([]);
+        });
     } catch (error) {
       console.error("Error uploading file", error);
     }
