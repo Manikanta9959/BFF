@@ -1,2 +1,4 @@
 backend/envAPI
 .env
+
+frontend/node_modules
