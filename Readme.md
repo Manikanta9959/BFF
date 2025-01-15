@@ -53,4 +53,8 @@ Example: docker compose logs backend
 
 
 ### Note:
-The uploaded files are currently stored within the container’s local filesystem. This means that files are saved inside the container during the upload process.
+The uploaded files are currently stored within the container's local filesystem, meaning they are saved inside the container during the upload process.
+
+However, if the backend container is restarted, the download functionality will not work because the previously uploaded files are not persistent. To ensure persistent storage, file mounting is required, but due to limited RAM on my laptop, this approach is not feasible. As a result, after a container restart, previously uploaded files will no longer be available for download from the UI.
+
+This is because cloud storage services like S3 are not being used for file storage.
