@@ -12,7 +12,10 @@ import urllib.parse
 
 
 router = APIRouter()
+ALLOWED_EXTENSIONS = ['txt', 'jpg', 'jpeg', 'png', 'json']
 
+def allowed_file(filename: str) -> bool:
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @router.get("/files/{user_id}", response_model=List[dict])
@@ -44,9 +47,12 @@ def upload_files(
     db: Session = Depends(GetSQLDB())  # Database session
 ):
     try:
+        if not allowed_file(file.filename):
+            raise HTTPException(status_code=400, detail="File type not allowed. Only txt, jpg, png, and json are allowed.")
         # Generate unique filename and save the file
         temp_id = str(uuid4())
         file_path = f"/app/file_uploads/{user_id}_{temp_id}_{file.filename}"
+        
         with open(file_path, "wb") as f:
             f.write(file.file.read())
         
