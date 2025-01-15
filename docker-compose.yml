@@ -12,6 +12,16 @@ services:
     depends_on:
       - db
 
+  app:
+    build:
+      context: ./frontend/my-app
+      dockerfile: Dockerfile
+      no_cache: true
+    container_name: container_app
+    ports:
+      - "3000:80"
+    networks:
+      - current_docker_network
   db:
     image: mysql:8.0
     container_name: container_db

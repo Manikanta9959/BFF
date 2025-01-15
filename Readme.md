@@ -1,62 +1,40 @@
-after cloing the repo
+# Docker Setup for Fullstack App
 
-#backend
-cd /backend
+This project uses Docker Compose to run a fullstack application consisting of three services:
+- **Backend** (Python FastAPI)
+- **Frontend** (React)
+- **Database** (MySQL)
 
-#create & activate virtual env
-python -m venv envAPI
-envAPI\Scripts\activate
+## Prerequisites
 
-pip install -r requirements.txt
+Ensure that you have the following installed on your machine:
+- **Docker**: [Install Docker](https://docs.docker.com/get-docker/)
+- **Docker Compose**: [Install Docker Compose](https://docs.docker.com/compose/install/)
 
+## Getting Started
 
+1. **Clone the repository**:
+   ```bash
+   git clone <your-repo-url>
+   cd <your-project-folder>
+Start the containers: From the root of your project, run the following command to start all services (Backend, Frontend, and Database):
+docker-compose up --build
+This command will:
+Build the Docker images for both the backend and frontend from the respective Dockerfiles.
+Set up the MySQL database and initialize it using the init.sql file if available.
 
+Access the services:
+Frontend: Visit http://localhost:3000 in your browser.
+Backend: Access the API at http://localhost:8000.
+Database: The MySQL database is available at localhost:3307.
 
+Stop the containers: To stop the services, press Ctrl+C or run the following in your terminal:
+docker-compose down
 
+View Logs (optional): To see logs from any container, you can use:
+docker-compose logs <container_name>
+Example: docker-compose logs backend
 
-
-
-
-
-
-
-
-
-
-
-
-<!-- LOG_DIR=/eazydata/logs/
-EAZYDATA_REGION=in
-EAZYDATA_LANDING_PORT=
-EAZYDATA_LANDING_INTERNAL_PORT=80
-EAZYDATA_LANDING_IP=
- 
-EAZYDATA_APP_PORT=9500
-EAZYDATA_APP_INTERNAL_PORT=80
-EAZYDATA_APP_IP=10.11.0.59
- 
-EAZYDATA_API_PORT=8011
-EAZYDATA_API_INTERNAL_PORT=8011
-EAZYDATA_API_IP=10.11.0.11
- 
-EAZYDATA_MGMT_PORT=8009
-EAZYDATA_MGMT_INTERNAL_PORT=8009
-EAZYDATA_MGMT_IP=10.11.0.9
- 
-EAZYDATA_MGMT_REGION_PORT=8010
-EAZYDATA_MGMT_REGION_INTERNAL_PORT=8010
-EAZYDATA_MGMT_REGION_IP=10.11.0.10
-EAZYDATA_REDIS_IP=10.11.0.201
-EAZYDATA_REDIS_PORT=6380
-EAZYDATA_REDIS_INTERNAL_PORT=6379
- 
-EAZYDATA_REGION_REDIS_IP=10.11.0.201
-EAZYDATA_REGION_REDIS_PORT=6380
-EAZYDATA_REGION_REDIS_INTERNAL_PORT=6379
-CURRENT_DOCKER_NETWORK=eazydata.dev
-CURRENT_DOCKER_NETWORK_CIDR=10.11.0.0/24
- 
-PAYMENT_QUEUE=payment
-PIPELINERUN_QUEUE=pipelinerun
-EAZYDATA_REGION=IN -->
-
+### Notes:
+1. Replace `<your-repo-url>` with your actual repository URL.
+2. This `README.md` now includes everything in a single document for easier setup.
